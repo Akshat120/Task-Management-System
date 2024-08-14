@@ -1,24 +1,33 @@
 package db
 
 import (
-	"database/sql"
 	"log"
+	"os"
 
-	_ "github.com/lib/pq"
+	"github.com/go-pg/pg/v10"
 )
 
-var DB *sql.DB
+func InitDB() *pg.DB {
+	// Get the connection string from the environment variable
+	connStr := os.Getenv("DATABASE_URL")
+	if connStr == "" {
+		log.Fatal("DATABASE_URL environment variable is not set")
+	}
 
-func InitDB() {
-	var err error
-	connStr := "postgres://postgres:123456@localhost/Task-Management-System?sslmode=disable"
-	DB, err = sql.Open("postgres", connStr)
+	// Parse the connection string and set up options for pg.Connect
+	opts, err := pg.ParseURL(connStr)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error parsing DATABASE_URL: %v", err)
 	}
 
-	if err = DB.Ping(); err != nil {
-		log.Fatal(err)
+	// Connect to the database
+	db := pg.Connect(opts)
+
+	// Check if the connection is successful by running a simple query
+	if _, err := db.Exec("SELECT 1"); err != nil {
+		log.Fatalf("Error connecting to the database: %v", err)
 	}
 
+	log.Println("Connected to the database successfully")
+	return db
 }

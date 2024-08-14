@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .task-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-top: 0;
+        }
+        .task-detail {
+            margin-bottom: 10px;
+        }
+        .task-detail label {
+            font-weight: bold;
+        }
+        .task-detail .value {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="task-container">
+        <h1>Task Details</h1>
+        <div class="task-detail">
+            <label for="id">ID:</label>
+            <span class="value">{{ .DrnID }}</span>
+        </div>
+        <div class="task-detail">
+            <label for="title">Title:</label>
+            <span class="value">{{ .Title }}</span>
+        </div>
+        <div class="task-detail">
+            <label for="description">Description:</label>
+            <span class="value">{{ .Description }}</span>
+        </div>
+        <div class="task-detail">
+            <label for="status">Status:</label>
+            <span class="value">{{ .Status }}</span>
+        </div>
+        <div class="task-detail">
+            <label for="due-date">Due Date:</label>
+            <span class="value">{{ if .DueDate }}{{ .DueDate.Format "2006-01-02 15:04:05" }}{{ else }}Not Set{{ end }}</span>
+        </div>
+    </div>
+</body>
+</html>
