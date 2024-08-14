@@ -3,3 +3,6 @@
 
 # Binaries
 bin/
+
+# Ignore the executable file
+*.exe
