@@ -36,7 +36,7 @@
         <h1>Task Details</h1>
         <div class="task-detail">
             <label for="id">ID:</label>
-            <span class="value">{{ .DrnID }}</span>
+            <span class="value">{{ .DrnId }}</span>
         </div>
         <div class="task-detail">
             <label for="title">Title:</label>
@@ -52,7 +52,7 @@
         </div>
         <div class="task-detail">
             <label for="due-date">Due Date:</label>
-            <span class="value">{{ if .DueDate }}{{ .DueDate.Format "2006-01-02 15:04:05" }}{{ else }}Not Set{{ end }}</span>
+            <span class="value">{{ if .DueDate }}{{ .DueDate.Format "2006-01-02" }}{{ else }}Not Set{{ end }}</span>
         </div>
     </div>
 </body>

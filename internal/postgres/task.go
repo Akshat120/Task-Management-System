@@ -46,6 +46,17 @@ func (t taskPgRepo) Delete(uuid.UUID) (bool, error) {
 }
 
 // Upsert implements repos.TaskRepo.
-func (t taskPgRepo) Upsert(*repos.Task) (uuid.UUID, error) {
-	panic("unimplemented")
+func (t taskPgRepo) Upsert(task *repos.Task) (uuid.UUID, error) {
+	_, err := t.DB.Model(task).
+		OnConflict("(drn_id) DO UPDATE").
+		Set("title = EXCLUDED.title").
+		Set("description = EXCLUDED.description").
+		Set("status = EXCLUDED.status").
+		Set("due_date = EXCLUDED.due_date").
+		Returning("drn_id").
+		Insert()
+	if err != nil {
+		return uuid.Nil, err
+	}
+	return task.DrnId, nil
 }

@@ -13,7 +13,7 @@ type PreviewTaskHandler struct {
 	tmpl *template.Template
 }
 
-func NewTaskHandler(tmpl *template.Template, repo repos.TaskRepo) *PreviewTaskHandler {
+func NewPreviewTaskHandler(tmpl *template.Template, repo repos.TaskRepo) *PreviewTaskHandler {
 	return &PreviewTaskHandler{tmpl: tmpl, repo: repo}
 }
 

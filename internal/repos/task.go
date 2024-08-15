@@ -7,11 +7,11 @@ import (
 )
 
 type Task struct {
-	DrnID       uuid.UUID
-	Title       string
-	Description string
-	Status      string
-	DueDate     *time.Time
+	DrnId       uuid.UUID  `json:"drn_id"`
+	Title       string     `json:"title"`
+	Description string     `json:"description,omitempty"`
+	Status      string     `json:"status"`
+	DueDate     *time.Time `json:"due_date,omitempty"`
 }
 
 type TaskRepo interface {
